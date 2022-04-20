@@ -4,7 +4,6 @@ function solution(id_list, report, k) {
 }
 
 const foo = (id_list, report, k) => {
-    let reports = id_list.map(() => []);
     let counts = id_list.map(() => 0);
     let result = id_list.map(() => 0);
     
