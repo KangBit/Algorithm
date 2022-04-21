@@ -1,13 +1,9 @@
 function solution(absolutes, signs) {
-    let answer = 0;
-    
-    absolutes.forEach((num, index)=>{
+    return absolutes.reduce((prev,curr,index)=> {
         if(signs[index]){
-            answer += num;     
+            return prev += curr;
         }else {
-            answer -= num; 
+            return prev -= curr;
         }
-    });
-    
-    return answer;
+    }, 0)
 }
