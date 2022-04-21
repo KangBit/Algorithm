@@ -1,11 +1,6 @@
 function solution(numbers) {
-    let answer = 0;
+    let total = 45;
+    let sum = numbers.reduce((prev,curr)=> prev + curr);
     
-    Array.from({length: 10}, (v, i) => {
-        if(!numbers.includes(i)){
-            answer += i
-        }
-    });
-    
-    return answer;
+    return total - sum;
 }
