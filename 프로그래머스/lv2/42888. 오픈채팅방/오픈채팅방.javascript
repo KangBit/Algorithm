@@ -1,5 +1,11 @@
 function solution(records) {
-    let nicknames = records.reduce((prev, curr, i)=>{
+    let nicknames = getNicknames(records)
+
+    return getMessages(nicknames, records)
+}
+
+let getNicknames = (records) => {
+    return records.reduce((prev, curr, i)=>{
         let [action, uid, nickname] = curr.split(" ");
         
         if(action !== "Leave"){
@@ -7,7 +13,9 @@ function solution(records) {
         }
         return prev;
     }, {})
+}
 
+let getMessages = (nicknames, records) => {
     return records.reduce((prev, curr, i)=>{
         let [action, uid, nickname] = curr.split(" ");
         
