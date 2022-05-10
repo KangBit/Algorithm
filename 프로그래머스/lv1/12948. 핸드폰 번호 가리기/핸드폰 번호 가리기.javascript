@@ -1,12 +1,5 @@
 function solution(phone_number) {
-    let last = phone_number.substr(-4,phone_number.length)
-    let answer = getStars(phone_number.length-4) + last;
+    let answer = "*".repeat(phone_number.length-4) + phone_number.slice(-4);
     
     return answer;
-}
-
-const getStars = (length) => {
-    return [...new Array(length)].reduce((prev,curr) => {
-        return prev + "*"
-    },"")
 }
