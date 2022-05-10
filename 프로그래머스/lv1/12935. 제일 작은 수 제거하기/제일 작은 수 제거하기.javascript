@@ -4,13 +4,7 @@ function solution(arr) {
     }
     
     let answer = [...arr];
-    let [minIndex, min] = answer.reduce((prev,curr,i)=>{
-        if(prev[1] > curr){
-            return [i, curr];
-        }else {
-            return prev;
-        }
-    },[0,answer[0]])
+    let min = Math.min(...arr);
     
     return answer.filter((num)=>{
         return num > min;
