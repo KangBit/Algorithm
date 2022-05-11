@@ -2,22 +2,18 @@ function solution(n, t, m, p) {
     let answer = '';
     let arr = [];
     let num = 0;
-    let step = 0;
+    let turn = 0;
     
-    while(step < t){
-        arr.push(...foo(num,n))
+    while(turn < t){
+        arr.push(...num.toString(n).split(""))
         num += 1;
         
-        let index = p + m*step -1;
+        let index = p + m*turn -1;
         if(arr.length > index){
             answer += arr[index];
-            step ++;
+            turn ++;
         }
     }
 
     return answer.toUpperCase();
-}
-
-const foo = (num,n) => {
-    return num.toString(n).split("");
 }
