@@ -1,7 +1,5 @@
 function solution(citations) {
     let h = 0;
-
-    if(citations[citations.length -1] === 0) return 0;
     
     while(h <= citations.length){
         h += 1;
