@@ -6,5 +6,7 @@ function solution(numbers) {
         return  compareB - compareA;
     })
     
-    return BigInt(numbers.join("")) + ""
+    if(numbers[0] === 0) return '0'
+    
+    return numbers.join("");
 }
