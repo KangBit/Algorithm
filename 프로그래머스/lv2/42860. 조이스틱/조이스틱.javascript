@@ -5,16 +5,15 @@
 function solution(name) {
   let arr = name.split("");
 
+  if (!hasNextStep(arr)) {
+    return 0;
+  }
+
   let right = foo(false, 0, arr, 0, true);
   let left = foo(true, 0, arr, 0, true);
 
   let result = Math.min(left, right);
 
-  if (result < 0) {
-    result = 0;
-  }
-
-  console.log(result);
   return result;
 }
 
@@ -27,8 +26,7 @@ const foo = (reverse, p, arr, count, flag) => {
   }
 
   let newArr = [...arr];
-  let set = [...new Set(arr)];
-  if (set.length == 1 && set[0] === "A") {
+  if (!hasNextStep(arr)) {
     return count - 1;
   }
 
@@ -77,4 +75,8 @@ const foo = (reverse, p, arr, count, flag) => {
 const foo2 = (char) => {
   let charCode = char.charCodeAt();
   return Math.min(charCode - 65, 91 - charCode);
+};
+
+const hasNextStep = (arr) => {
+  return arr.join("").replace(/A/gi, "").length > 0;
 };
