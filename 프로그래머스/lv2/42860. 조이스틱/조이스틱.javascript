@@ -9,15 +9,19 @@ function solution(name) {
     return 0;
   }
 
-  let right = foo(false, 0, arr, 0, true);
-  let left = foo(true, 0, arr, 0, true);
+  let right = next(false, 0, arr, 0, false);
+  let left = next(true, 0, arr, 0, false);
 
   let result = Math.min(left, right);
 
   return result;
 }
 
-const foo = (reverse, p, arr, count, flag) => {
+const next = (reverse, p, arr, count, canGoBack) => {
+  if (!hasNextStep(arr)) {
+    return count - 1;
+  }
+
   if (p === arr.length) {
     p = 0;
   }
@@ -26,53 +30,41 @@ const foo = (reverse, p, arr, count, flag) => {
   }
 
   let newArr = [...arr];
-  if (!hasNextStep(arr)) {
-    return count - 1;
-  }
+  let increase = charSelect(newArr[p]);
+  newArr.splice(p, 1, "A");
 
   if (reverse) {
     // 왼쪽으로 진행중일 경우
-    let increase = foo2(arr[p]);
-    newArr.splice(p, 1, "A");
-
     if (increase !== 0) {
-      let left = foo(true, p - 1, newArr, count + increase + 1, false);
+      let left = next(reverse, p - 1, newArr, count + increase + 1, true);
       return left;
-    } else {
-      if (flag) {
-        let left = foo(true, p - 1, newArr, count + 1, true);
-        return left;
-      } else {
-        let left = foo(true, p - 1, newArr, count + 1, true);
-        let right = foo(false, p + 1, newArr, count - 1, true);
-
-        return Math.min(left, right);
-      }
     }
+    if (!canGoBack) {
+      let left = next(reverse, p - 1, newArr, count + 1, false);
+      return left;
+    }
+
+    let left = next(reverse, p - 1, newArr, count + 1, false);
+    let right = next(!reverse, p + 1, newArr, count - 1, false);
+    return Math.min(left, right);
   } else {
     // 오른쪽으로 진행중일 경우
-    let increase = foo2(arr[p]);
-    newArr.splice(p, 1, "A");
-
-    // A가 아닐경우
     if (increase !== 0) {
-      let right = foo(false, p + 1, newArr, count + increase + 1, false);
+      let right = next(reverse, p + 1, newArr, count + increase + 1, true);
       return right;
-    } else {
-      // A일경우
-      if (flag) {
-        let right = foo(false, p + 1, newArr, count + 1, true);
-        return right;
-      } else {
-        let left = foo(true, p - 1, newArr, count - 1, true);
-        let right = foo(false, p + 1, newArr, count + 1, true);
-        return Math.min(left, right);
-      }
     }
+    if (!canGoBack) {
+      let right = next(reverse, p + 1, newArr, count + 1, false);
+      return right;
+    }
+
+    let left = next(!reverse, p - 1, newArr, count - 1, false);
+    let right = next(reverse, p + 1, newArr, count + 1, false);
+    return Math.min(left, right);
   }
 };
 
-const foo2 = (char) => {
+const charSelect = (char) => {
   let charCode = char.charCodeAt();
   return Math.min(charCode - 65, 91 - charCode);
 };
