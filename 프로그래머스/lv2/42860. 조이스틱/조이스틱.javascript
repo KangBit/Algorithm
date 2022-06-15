@@ -1,16 +1,15 @@
 function solution(name) {
-  let arr = name.split("");
-
-  if (!hasNextStep(arr)) {
+  if (!hasNextStep(name)) {
     return 0;
   }
 
-  let right = next(name, 0, false);
-  let left = next(
-    arr[0] + arr.slice(1, arr.length).reverse().join(""),
-    0,
-    false
-  );
+  let arr = name.split("");
+    
+  let rightStr = name;
+  let leftStr = arr[0] + arr.slice(1, arr.length).reverse().join("");
+
+  let right = next(rightStr, 0, false);
+  let left = next(leftStr, 0, false);
 
   let result = Math.min(left, right);
 
@@ -18,16 +17,15 @@ function solution(name) {
 }
 
 const next = (str, count, canGoBack) => {
-  let arr = str.split("");
-
-  if (!hasNextStep(str.split(""))) {
+  if (!hasNextStep(str)) {
     return count - 1;
   }
 
-  let increase = charSelect(str[0]);
+  let arr = str.split("");
+  let increase = charSelect(arr[0]);
   let nextStr = {
     right: arr.slice(1, arr.length).join("") + "A",
-    left: arr.slice(1, arr.length).reverse().join("") + "A",
+    left: arr.reverse().join(""),
   };
 
   if (str[0] !== "A") {
@@ -49,6 +47,7 @@ const charSelect = (char) => {
   return Math.min(charCode - 65, 91 - charCode);
 };
 
-const hasNextStep = (arr) => {
+const hasNextStep = (str) => {
+  let arr = str.split("");
   return arr.join("").replace(/A/gi, "").length > 0;
 };
