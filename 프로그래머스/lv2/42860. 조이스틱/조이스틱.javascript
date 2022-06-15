@@ -14,46 +14,32 @@ function solution(name) {
 
   let result = Math.min(left, right);
 
-  console.log(left, right);
-  console.log(result);
   return result;
 }
 
 const next = (str, count, canGoBack) => {
-  console.log(str, count, canGoBack);
   let arr = str.split("");
+
   if (!hasNextStep(str.split(""))) {
     return count - 1;
   }
 
   let increase = charSelect(str[0]);
+  let nextStr = {
+    right: arr.slice(1, arr.length).join("") + "A",
+    left: arr.slice(1, arr.length).reverse().join("") + "A",
+  };
 
   if (str[0] !== "A") {
-    return next(
-      arr.slice(1, arr.length).join("") + "A",
-      count + increase + 1,
-      true
-    );
+    return next(nextStr["right"], count + increase + 1, true);
   }
 
   if (!canGoBack) {
-    return next(
-      arr.slice(1, arr.length).join("") + "A",
-      count + increase + 1,
-      false
-    );
+    return next(nextStr["right"], count + increase + 1, false);
   }
 
-  let right = next(
-    arr.slice(1, arr.length).join("") + "A",
-    count + increase + 1,
-    false
-  );
-  let left = next(
-    arr.slice(1, arr.length).reverse().join("") + "A",
-    count + increase - 1,
-    false
-  );
+  let right = next(nextStr["right"], count + increase + 1, false);
+  let left = next(nextStr["left"], count + increase - 1, false);
 
   return Math.min(left, right);
 };
