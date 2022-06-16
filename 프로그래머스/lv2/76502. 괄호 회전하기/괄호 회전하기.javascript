@@ -14,8 +14,7 @@ function solution(s) {
 
 const circulate = (s) => {
     let arr = s.split("");
-    let t = arr.shift();
-    arr.push(t);
+    arr.push(arr.shift());
     
     return arr.join("");
 }
