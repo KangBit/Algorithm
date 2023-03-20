@@ -7,32 +7,26 @@ function solution(m, n, startX, startY, balls) {
 }
 
 const getNearlist = (m, n, x1, y1, x2, y2) => {
-    let [left, right, top, bottom] = [
-        [-x1, y1],
-        [m + m - x1, y1],
-        [x1, n + n - y1],
-        [x1, -y1]
-    ];
+    let symmetryPoints = [];
+
+    if (x1 !== x2 || y1 < y2) {
+        const bottom = [x1, -y1];
+        symmetryPoints.push(bottom);
+    }
+    if (x1 !== x2 || y1 > y2) {
+        const top = [x1, n + n - y1];
+        symmetryPoints.push(top);
+    }
+    if (y1 !== y2 || x1 < x2) {
+        const left = [-x1, y1];
+        symmetryPoints.push(left);
+    }
+    if (y1 !== y2 || x1 > x2) {
+        const right = [m + m - x1, y1];
+        symmetryPoints.push(right);
+    }
     
-    if (x1 === x2 && y1 > y2) {
-        bottom = undefined;
-    }
-    if (x1 === x2 && y1 < y2) {
-        top = undefined;
-    }
-    if (y1 === y2 && x1 > x2) {
-        left = undefined;
-    }
-    if (y1 === y2 && x1 < x2) {
-        right = undefined;
-    }
-    
-    return [left, right, top, bottom].reduce((min, curr) => {
-        if (curr === undefined) {
-            return min;
-        }
-        
-        const [x, y] = curr;
+    return symmetryPoints.reduce((min, [x,y])=>{
         return Math.min(min, (x-x2)**2 + (y-y2)**2);
     }, m**2 + n**2);
 }
