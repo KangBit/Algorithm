@@ -1,9 +1,9 @@
 function solution(m, n, startX, startY, balls) {
-    return balls.reduce((acc, curr) => {
-        let dist = getNearlist(m, n, startX, startY, curr[0], curr[1]);
+    return balls.map(([x, y]) => {
+        let dist = getNearlist(m, n, startX, startY, x, y);
         
-        return [...acc, Math.min(dist)];
-    }, []);
+        return Math.min(dist);
+    });
 }
 
 const getNearlist = (m, n, x1, y1, x2, y2) => {
