@@ -1,8 +1,6 @@
 function solution(m, n, startX, startY, balls) {
     return balls.map(([x, y]) => {
-        let dist = getNearlist(m, n, startX, startY, x, y);
-        
-        return Math.min(dist);
+        return getNearlist(m, n, startX, startY, x, y);
     });
 }
 
