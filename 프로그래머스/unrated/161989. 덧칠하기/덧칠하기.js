@@ -1,10 +1,9 @@
 function solution(n, m, section) {
-    let answer = 0;
-    for(let i = 1; i <= n; i++) {
-        if (section.includes(i)){
-            i += m-1
-            answer += 1
+    return section.reduce((acc, curr)=>{
+        if (curr < acc[0] + m) {
+            return acc
+        }else {
+            return [curr, acc[1] + 1]
         }
-    }
-    return answer;
+    },[-m, 0])[1]
 }
