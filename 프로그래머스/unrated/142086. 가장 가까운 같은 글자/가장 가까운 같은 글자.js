@@ -1,16 +1,12 @@
 function solution(s) {
-    let arr = [];
-    
-    return s.split("").reduce((acc, curr)=>{
-        const lastIndex = arr.lastIndexOf(curr);
+    return s.split("").reduce((acc, curr, i, originArr)=>{
+        const lastIndex = originArr.slice(0,i).lastIndexOf(curr);
         
         if(lastIndex >= 0) {
-            acc.push(arr.length - lastIndex);
+            acc.push(i - lastIndex);
         }else {
             acc.push(-1);
         }
-        
-        arr.push(curr);
         
         return acc;
     },[]);
