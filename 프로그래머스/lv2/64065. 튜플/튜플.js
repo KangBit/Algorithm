@@ -1,12 +1,9 @@
 function solution(s) {
-    let arr = s.slice(2,s.length -2).split("},{").sort((a, b) => a.split(",").length - b.split(",").length);
-    
-    return arr.reduce((acc, curr)=>{
-        curr.split(",").forEach((el)=>{
-            if(!acc.includes(+el)){
-                acc.push(+el);
-            }
-        })
-        return acc;
+    let str = s.replaceAll("{","[").replaceAll("}","]");
+    let arr = JSON.parse(str).sort((a,b) => a.length - b.length);
+
+    return arr.reduce((acc, curr) => {
+        let el = curr.find((el) => !acc.includes(el));
+        return [...acc, el];
     },[]);
 }
