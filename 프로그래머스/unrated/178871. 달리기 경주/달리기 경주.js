@@ -1,9 +1,8 @@
 function solution(players, callings) {
-    let ranks = {};
-    for (let i = 0; i < players.length; i++) {
-        ranks[players[i]] = i;
-    }
-
+    let ranks = players.reduce((acc, curr, idx)=>{
+        acc[curr] = idx;
+        return acc;
+    },{})
     
     return callings.reduce((acc, curr) => {
         let rank = ranks[curr];
