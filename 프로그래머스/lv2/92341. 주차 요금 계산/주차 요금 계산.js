@@ -14,19 +14,15 @@ function solution(fees, records) {
         }
         
         if(cars.has(number)){
-            parkingTime = parkingTime + cars.get(number);
+            cars.set(number, parkingTime + cars.get(number));
+        }else {
+            cars.set(number, parkingTime);    
         }
-
-        cars.set(number, parkingTime);
     });
     
     parkingSpace.forEach((time, number) => {
         let parkingTime = getParkingTime(time);
-        if(cars.has(number)){
-            parkingTime = parkingTime + cars.get(number);
-        }
-
-        cars.set(number, parkingTime);
+        cars.set(number, parkingTime + cars.get(number));
     })
     
     return Array.from(cars)
