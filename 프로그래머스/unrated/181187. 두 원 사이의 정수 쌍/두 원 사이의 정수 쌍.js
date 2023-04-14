@@ -9,10 +9,7 @@ function solution(r1, r2) {
             y1 = 0;
         }
         
-        if(!Number.isInteger(y1)) {
-            y1 = Math.ceil(y1);
-        }
-        
+        y1 = Math.ceil(y1);
         y2 = Math.floor(y2)
         
         count = count + y2 - y1 + 1
