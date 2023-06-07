@@ -23,8 +23,6 @@ function solution(x, y, n) {
                 acc.add(curr * 3);
             }
 
-            acc.delete(curr);
-
             return acc;
         },new Set());
         
