@@ -11,13 +11,11 @@ class VideoPlayer {
     }
     
     next() {
-        this.skipOpening();
         this.pos = Math.min(this.pos + 10, this.length);
         this.skipOpening();
     }
     
     prev() {
-        this.skipOpening();
         this.pos = Math.max(this.pos - 10, 0);
         this.skipOpening();
     }
@@ -44,6 +42,8 @@ function solution(video_len, pos, op_start, op_end, commands) {
     const op_end_sec = stringToSecond(op_end);
     
     const player = new VideoPlayer(video_len_sec, pos_sec, op_start_sec, op_end_sec);
+    
+    player.skipOpening();
     
     for (let command of commands) {
         if (command === 'prev') {
