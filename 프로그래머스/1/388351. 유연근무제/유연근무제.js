@@ -8,7 +8,7 @@ function solution(schedules, timelogs, startday) {
                 return false;
             }
             
-            let targetTime = getDeadLine(schedules[i]);
+            const targetTime = getDeadLine(schedules[i]);
             if (targetTime >= timelog) {
                 return false
             }
