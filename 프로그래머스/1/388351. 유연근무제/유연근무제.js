@@ -1,9 +1,8 @@
 function solution(schedules, timelogs, startday) {
-    var answer = schedules.length;
-    var count = new Array(schedules.length).fill(0);
+    var result = schedules.length;
     
     for (let i = 0; i < schedules.length; i++) {
-        const result = timelogs[i].find((timelog, j) => {
+        const lateness = timelogs[i].find((timelog, j) => {
             const day = (startday + j) % 7;
             if (day === 0 || day === 6) { // 토요일, 일요일
                 return false;
@@ -17,12 +16,12 @@ function solution(schedules, timelogs, startday) {
             return true
         })
         
-        if (result) {
-            answer--;
+        if (lateness) {
+            result--;
         }
     }
     
-    return answer;
+    return result;
 }
 
 const getDeadLine = (time) => {
