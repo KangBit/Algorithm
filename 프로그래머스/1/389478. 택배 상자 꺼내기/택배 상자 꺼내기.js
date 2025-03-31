@@ -1,5 +1,4 @@
 function solution(n, w, num) {
-    const floor = Math.ceil(num % w);
     const t = num % w || w;
 
     let answer = 0;
