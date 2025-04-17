@@ -1,18 +1,10 @@
 function solution(phone_book) {
-    const set = new Set(phone_book);
-    
-    return !phone_book.some((phone) => {
-        set.delete(phone)
-        
-        for (let i = 1; i <= phone.length; i++) {
-            const piece = phone.slice(0, i);
-            if (set.has(piece)) {
-                set.add(phone);
-                return true;
-            }
+    return !phone_book.sort().some((phone, i) => {
+        if (!phone_book[i+1]) {
+            return false;
         }
         
-        set.add(phone);
-        return false;
+        return phone_book[i+1].startsWith(phone);
     })
+    
 }
