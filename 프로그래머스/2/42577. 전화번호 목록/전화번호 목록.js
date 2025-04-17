@@ -1,7 +1,7 @@
 function solution(phone_book) {
     const set = new Set(phone_book);
     
-    return !phone_book.find((phone) => {
+    return !phone_book.some((phone) => {
         set.delete(phone)
         
         for (let i = 1; i <= phone.length; i++) {
