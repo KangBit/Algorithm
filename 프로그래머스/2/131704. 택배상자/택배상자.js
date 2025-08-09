@@ -1,13 +1,17 @@
 function solution(order) {
     let subBelt = []
     let answer = 0;
-    let n = 0;
     
     const getBoxFromSubBelt = () => {
-        while(subBelt[subBelt.length-1] === order[n] && n < order.length) {
-            n++;
+        for (let i = answer; i < order.length; i++) {
+            const box = subBelt.pop();
+            
+            if (box !== order[answer]) {
+                subBelt.push(box);
+                return;
+            }
+            
             answer++;
-            subBelt.pop();
         }
     }
     
