@@ -4,14 +4,14 @@ function solution(order) {
     
     const getBoxFromSubBelt = () => {
         for (let i = answer; i < order.length; i++) {
-            const box = subBelt.pop();
+            const box = subBelt[subBelt.length - 1];
             
             if (box !== order[answer]) {
-                subBelt.push(box);
                 return;
             }
             
             answer++;
+            subBelt.pop();
         }
     }
     
